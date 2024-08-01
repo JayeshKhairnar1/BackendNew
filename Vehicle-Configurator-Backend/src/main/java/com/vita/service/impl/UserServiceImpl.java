@@ -19,6 +19,12 @@ public class UserServiceImpl implements UserService {
 		userRepo.save(user);
 		return user;
 	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

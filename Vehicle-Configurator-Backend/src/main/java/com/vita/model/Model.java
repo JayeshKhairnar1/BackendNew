@@ -23,13 +23,13 @@ public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  //removed eager type lazy from here because it was asking for jackson dependency and @Json Ignore Annotation
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "segId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Segment segment;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+   
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "manuId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Manufacturer manufacturer;
@@ -50,12 +50,9 @@ public class Model {
     private int safetyRating;
 
     public Model() {
-        // Default constructor
+      
     }
 
-    // Constructors if needed
-
-    // Getter and Setter methods
     public long getId() {
         return id;
     }
