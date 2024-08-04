@@ -1,6 +1,5 @@
 package com.vita.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,41 +19,42 @@ import com.vita.service.ModelService;
 @RequestMapping("/api/models")
 public class ModelController {
 
-	@Autowired
-	private ModelService mod_serv;
-	
-	@GetMapping("/")
-	public ResponseEntity<List<Model>> getAllModels() {
-		try {
-			List<Model> models=mod_serv.getAllModels();
-			return new ResponseEntity<>(models,HttpStatus.OK);
+    @Autowired
+    private ModelService modelService;
+    
+    @GetMapping("/")
+    public ResponseEntity<List<Model>> getAllModels() {
+        try {
+            List<Model> models = modelService.getAllModels();
+            return new ResponseEntity<>(models, HttpStatus.OK);
+        } catch (Exception e) {
+            // Log the exception here
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-	}
+    @GetMapping("/{segId}/{manuId}")
+    public ResponseEntity<List<Model>> fetchModelsBySegmentAndManufacturer(@PathVariable Long segId, @PathVariable Long manuId) {
+        try {
+            List<Model> models = modelService.getAllModelsByManuIdAndSegId(segId, manuId);
+            return new ResponseEntity<>(models, HttpStatus.OK);
+        } catch (Exception e) {
+            // Log the exception here
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-	
-	@GetMapping("/{manuId}/{segId}")
-	public ResponseEntity<List<Model>> fetchCombinedSegmentAndManufacturer(@PathVariable Long segId, @PathVariable Long manuId) {
-		try {
-			List<Model>models= mod_serv.getAllModelsByManuIdAndSegId(segId,manuId);
-			return new ResponseEntity<>(models,HttpStatus.OK);
-
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		}
-
-	@GetMapping("/{modId}")
-	public ResponseEntity<Model>fetchModelsById(@PathVariable Long modId) {
-		try {
-			Model models= mod_serv.getModelsById(modId);
-			return new ResponseEntity<>(models,HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		}
-	
-
+    @GetMapping("/{modId}")
+    public ResponseEntity<Model> fetchModelById(@PathVariable Long modId) {
+        try {
+            Model model = modelService.getModelsById(modId);
+            return new ResponseEntity<>(model, HttpStatus.OK);
+        } catch (Exception e) {
+            // Log the exception here
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

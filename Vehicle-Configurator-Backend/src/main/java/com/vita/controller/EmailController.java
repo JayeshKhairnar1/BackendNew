@@ -25,3 +25,4 @@ public class EmailController {
         return emailService.loginEmail(email, SUBJECT, BODY);    
     }
 }
+ 

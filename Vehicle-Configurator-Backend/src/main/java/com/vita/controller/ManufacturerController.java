@@ -16,7 +16,7 @@ import com.vita.service.ManufacturerService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/AllManufacturers")
+@RequestMapping("/api/manufacturers")
 public class ManufacturerController {
 
 	@Autowired

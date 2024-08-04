@@ -1,4 +1,6 @@
-package com.vita.service.impl;
+ package com.vita.service.impl;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +22,15 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
-	@Override
+	
 	public User getUserByEmail(String email) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public User getUserById(String userid) {
+        return userRepo.findById(userid).orElse(null);
+    }
 	
 	
 }

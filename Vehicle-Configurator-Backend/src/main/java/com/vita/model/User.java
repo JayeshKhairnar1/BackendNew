@@ -4,7 +4,6 @@ import java.util.Random;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 
@@ -17,6 +16,8 @@ public class User {
 	private String address_line2;
 	private String city;
 	private String company_name;
+	
+	@Column(nullable = false, unique = true) //if 2 users have same email will give error 
 	private String email;
 	private String gst_number;
 	private String password;

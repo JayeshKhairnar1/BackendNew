@@ -38,6 +38,7 @@ public class AlternateComponent
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Component compId;
 	
+	/*
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "alt_comp_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -50,6 +51,7 @@ public class AlternateComponent
 	public Component getCompId() {
 		return compId;
 	}
+	*/
 
 	public Long getId() {
 		return id;
